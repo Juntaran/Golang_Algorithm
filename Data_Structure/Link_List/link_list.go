@@ -259,7 +259,7 @@ func (list *List) ChangeList(index int, value interface{}) error {
 	return nil
 }
 
-// 遍历输出切片
+// 遍历输出链表
 func (list *List) PrintList() {
 	list.lock.Lock()
 	defer list.lock.Unlock()
