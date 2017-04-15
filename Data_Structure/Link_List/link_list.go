@@ -300,6 +300,7 @@ func (list *List) PrintList() {
 		fmt.Println()
 	}
 }
+<<<<<<< HEAD
 
 // 对链表中的每个元素执行函数
 func (list *List) DoEach(f func(node ListNode))  {
@@ -319,3 +320,5 @@ func (list *List) Items() []*interface{} {
 	return items
 }
 
+=======
+>>>>>>> origin/master
