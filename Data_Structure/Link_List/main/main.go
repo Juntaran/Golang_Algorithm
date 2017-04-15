@@ -132,4 +132,5 @@ func main() {
 		fmt.Println("Length is", testList.LenList())
 		fmt.Println("isEmpty", testList.IsEmpty())
 	}
+	testList.Items()
 }

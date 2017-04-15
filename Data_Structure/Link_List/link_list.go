@@ -13,7 +13,7 @@ import (
 )
 
 type ListNode struct {			// 链表元素结构
-	value	interface{}
+	Value	interface{}
 	next 	*ListNode
 	prev 	*ListNode
 }
@@ -39,7 +39,7 @@ func (list *List) Prepend(value interface{}) {
 	defer list.lock.Unlock()
 	{
 		node := new(ListNode)
-		node.value = value
+		node.Value = value
 		if list.length == 0 {
 			list.head = node
 			list.tail = node
@@ -58,7 +58,7 @@ func (list *List) Append(value interface{}) {
 	defer list.lock.Unlock()
 	{
 		node := new(ListNode)
-		node.value = value
+		node.Value = value
 
 		if list.length == 0 {
 			list.head = node
@@ -82,7 +82,7 @@ func (list *List) Insert(value interface{}, index int) error {
 	defer list.lock.Unlock()
 	{
 		node := new(ListNode)
-		node.value = value
+		node.Value = value
 		if list.length == 0 {
 			list.head = node
 			list.tail = node
@@ -129,6 +129,32 @@ func (list *List) DeleteIndex(index int) error {
 	}
 }
 
+// 删除元素
+func (list *List) Remove(value interface{}) error {
+	if list.length == 0 {
+		return errors.New("Error: List Empty")
+	}
+	if list.head.Value == value {
+		list.head = list.head.next
+		list.length --
+		return nil
+	}
+	found := 0
+	for node := list.head; node != nil; node = node.next {
+		if *node.Value.(*ListNode) == value && found == 0 {
+			node.next.prev = node.prev
+			node.prev.next = node.next
+			list.length --
+			found ++
+		}
+	}
+	if found == 0 {
+		return errors.New("Error: Node not found")
+	}
+	return nil
+}
+
+
 // 删除所有值为value的元素
 func (list *List) DeleteValue(value interface{}) (int, error) {
 	list.lock.Lock()
@@ -143,21 +169,21 @@ Here:
 			return count, nil
 		}
 		// 链表头的值恰好为value
-		if list.head.value == value {
+		if list.head.Value == value {
 			list.head = list.head.next
 			list.length --
 			count ++
 			goto Here
 		}
 		for node := list.head; node.next != nil; node = node.next {
-			if node.value == value {
+			if node.Value == value {
 				node.prev.next = node.next
 				node.next.prev = node.prev
 				list.length --
 				count ++
 			}
 		}
-		if list.tail.value == value {
+		if list.tail.Value == value {
 			count ++
 			list.tail.prev.next = nil
 			list.length --
@@ -223,7 +249,7 @@ func (list *List) GetIndex(index int) (interface{}, error) {
 		for i := 1; i < index; i++ {
 			node = node.next
 		}
-		return node.value, nil
+		return node.Value, nil
 	}
 }
 
@@ -239,7 +265,7 @@ func (list *List) FindIndex(value interface{}) ([]int, int) {
 		count := 0
 		index := 1
 		for node := list.head; node != nil; node = node.next {
-			if node.value == value {
+			if node.Value == value {
 				count ++
 				result = append(result, index)
 			}
@@ -259,7 +285,7 @@ func (list *List) ChangeList(index int, value interface{}) error {
 	return nil
 }
 
-// 遍历输出切片
+// 遍历输出链表
 func (list *List) PrintList() {
 	list.lock.Lock()
 	defer list.lock.Unlock()
@@ -269,8 +295,27 @@ func (list *List) PrintList() {
 			return
 		}
 		for node := list.head; node != nil; node = node.next {
-			fmt.Printf("%v ", node.value)
+			fmt.Printf("%v ", node.Value)
 		}
 		fmt.Println()
 	}
 }
+
+// 对链表中的每个元素执行函数
+func (list *List) DoEach(f func(node ListNode))  {
+	for node := list.head; node != nil; node = node.next {
+		f(*node)
+	}
+}
+
+// 把链表中的每个元素放到一个切片里
+func (list *List) Items() []*interface{} {
+	items := make([]*interface{}, list.length)
+	for i, node := 0, list.head; node != nil; node = node.next {
+		items[i] = &node.Value
+		i ++
+	}
+	//fmt.Println(items)
+	return items
+}
+

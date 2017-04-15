@@ -12,13 +12,13 @@ import (
 	"errors"
 )
 
-type StackNode struct {				// 栈节点结构
+type stackNode struct {				// 栈节点结构
 	stackEle 	interface{}
-	next 		*StackNode
+	next 		*stackNode
 }
 
 type Stack struct {					// 栈结构
-	top		 	*StackNode
+	top		 	*stackNode
 	depth 		int
 	lock 		*sync.Mutex
 }
@@ -36,7 +36,7 @@ func (stack *Stack) Push(element interface{}) {
 	stack.lock.Lock()
 	defer stack.lock.Unlock()
 	{
-		newEle := new(StackNode)
+		newEle := new(stackNode)
 		newEle.stackEle = element
 		newEle.next = stack.top
 		stack.top = newEle

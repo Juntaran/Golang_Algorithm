@@ -12,14 +12,14 @@ import (
 	"errors"
 )
 
-type QueueNode struct {				// 队列节点结构
+type queueNode struct {				// 队列节点结构
 	queueEle 	interface{}			// 元素值
-	next 		*QueueNode			// next指针
+	next 		*queueNode			// next指针
 }
 
 type Queue struct {					// 队列结构
-	current		*QueueNode			// 队列元素
-	last 		*QueueNode			// 尾指针
+	current		*queueNode			// 队列元素
+	last 		*queueNode			// 尾指针
 	length		int					// 队列长度
 	lock 		*sync.Mutex			// 锁
 }
@@ -40,13 +40,13 @@ func (queue *Queue) Enqueue(element interface{})  {
 	{
 		// 锁内操作
 		if queue.length == 0 {
-			queue.current = &QueueNode{
+			queue.current = &queueNode{
 				queueEle: 	element,
 				next:		nil,
 			}
 			queue.last = queue.current
 		} else {
-			newEle := &QueueNode{
+			newEle := &queueNode{
 				queueEle: 	element,
 				next:		nil,
 			}
