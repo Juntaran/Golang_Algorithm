@@ -103,3 +103,19 @@ func (queue *Queue) PrintQueue() {
 		fmt.Println()
 	}
 }
+
+// 返回队列指定位置元素
+func (queue *Queue) Pos(index int) (interface{}, error) {
+	queue.lock.Lock()
+	defer queue.lock.Unlock()
+	{
+		if index >= queue.length || index < 0 {
+			return nil, errors.New("Error: Pos Index Out of Range")
+		}
+		var temp = queue.current
+		for i := 0; i < index; i++ {
+			temp = temp.next
+		}
+		return temp.queueEle, nil
+	}
+}

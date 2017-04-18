@@ -25,6 +25,13 @@ func main() {
 	fmt.Println("Length is", testQueue.LenQueue())
 	fmt.Println("isEmpty:", testQueue.IsEmpty())
 
+	ret, err := testQueue.Pos(3)
+	if err != nil {
+		log.Println(err)
+	} else {
+		fmt.Println(ret)
+	}
+
 	for i := 0; i < 15; i++ {
 		item, err := testQueue.Dequeue()
 		if err != nil {
