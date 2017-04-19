@@ -90,3 +90,12 @@ func (stack *Stack) PrintStack()  {
 		fmt.Println()
 	}
 }
+
+// 返回栈顶元素
+func (stack *Stack) Top() interface{} {
+	stack.lock.Lock()
+	defer stack.lock.Unlock()
+	{
+		return stack.top.stackEle
+	}
+}

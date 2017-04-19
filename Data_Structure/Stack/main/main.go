@@ -25,6 +25,8 @@ func main() {
 	fmt.Println("Length is", testStack.DepthStack())
 	fmt.Println("isEmpty", testStack.IsEmpty())
 
+	fmt.Println(testStack.Top())
+
 	for i := 0; i < 15; i++ {
 		item, err := testStack.Pop()
 		if err != nil {

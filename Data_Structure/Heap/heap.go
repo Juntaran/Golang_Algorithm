@@ -4,6 +4,12 @@ import (
 	"sync"
 )
 
+type Int int
+
+func (x Int) Less(than Item) bool {
+	return x < than.(Int)
+}
+
 type Item interface {
 	Less(than Item) bool
 }
@@ -111,6 +117,7 @@ func (h *Heap) siftDown() {
 		if h.Less(h.Get(i), h.Get(child)) {
 			break
 		}
+		h.data[i], h.data[child] = h.data[child], h.data[i]
 	}
 }
 

@@ -7,16 +7,11 @@
 package Bubble_Sort
 
 func Bubble_Sort(nums []int)  {
-	for i := len(nums); ; i-- {
-		swap := false
-		for j := 1; j <= i; j++ {
-			if nums[j-1] > nums[j] {
-				swap = true
-				nums[j-1], nums[j] = nums[j], nums[j-1]
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i] > nums[j] {
+				nums[i], nums[j] = nums[j], nums[i]
 			}
-		}
-		if swap == false {
-			break
 		}
 	}
 }

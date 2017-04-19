@@ -21,7 +21,7 @@ func Binary_Insert_Sort(nums []int)  {
 				right = middle - 1
 			}
 		}
-		for j := i; i > left ; j-- {
+		for j := i; j > left ; j-- {
 			nums[j] = nums[j-1]
 		}
 		nums[left] = insertNum

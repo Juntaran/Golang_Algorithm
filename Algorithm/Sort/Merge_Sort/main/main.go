@@ -1,19 +1,18 @@
 /**
   * Author: Juntaran
   * Email:  Jacinthmail@gmail.com
-  * Date:   2017/4/18 17:18
+  * Date:   2017/4/19 10:54
   */
 
 package main
 
 import (
-	"Golang_Algorithm/Algorithm/Sort/Quick_Sort"
 	"fmt"
+	"Golang_Algorithm/Algorithm/Sort/Merge_Sort"
 )
 
 func main() {
 	testArray := []int{4, 2, 6, 7, 9, 5, 1, 3}
-	//Quick_Sort.Quick_Sort_Recurse(testArray)
-	Quick_Sort.Quick_Sort_Unrecurse(testArray)
+	Merge_Sort.Merge_Sort(testArray)
 	fmt.Println(testArray)
 }
