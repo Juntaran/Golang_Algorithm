@@ -6,6 +6,8 @@
 
 package Fibonacci_Search
 
+import "fmt"
+
 // 斐波那契查找
 func Fibonacci_Search(nums []int, key int) int {
 	// 斐波那契数列
@@ -22,7 +24,7 @@ func Fibonacci_Search(nums []int, key int) int {
 		k ++
 	}
 	// 扩展nums到Fibonacci[k]-1的长度
-	var temp = new([Fibonacci[k]-1]int)
+	var temp = make([]int, Fibonacci[k]-1)
 	for i := 0; i < len(nums); i++ {
 		temp[i] = nums[i]
 	}
@@ -42,11 +44,14 @@ func Fibonacci_Search(nums []int, key int) int {
 			k = k - 2
 		} else {
 			if middle < len(nums) {
+				fmt.Println("Find", key, "in", middle)
 				return middle
 			} else {
+				fmt.Println("Find", key, "in", len(nums)-1)
 				return len(nums) - 1
 			}
 		}
 	}
+	fmt.Println("Not Find")
 	return -1
 }

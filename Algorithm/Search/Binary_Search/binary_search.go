@@ -6,6 +6,8 @@
 
 package Binary_Search
 
+import "fmt"
+
 // 二分查找首先要数组有序
 func Binary_Search(nums []int, key int) int {
 	left, right := 0, len(nums)-1
@@ -16,8 +18,10 @@ func Binary_Search(nums []int, key int) int {
 		} else if key > nums[middle] {
 			left = middle + 1
 		} else {
+			fmt.Println("Find", key, "in", middle)
 			return middle
 		}
 	}
+	fmt.Println("Not Find")
 	return -1
 }
