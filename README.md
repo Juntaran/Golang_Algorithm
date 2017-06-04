@@ -37,3 +37,11 @@ ____
 8. 可以通过组合方式来创建多维数组和`slice`。`map`的值可以是`slice`或者另一个`map`。`slice`不能作为`map`的键
 
 9. 在函数之间传递`slice`和`map`是相当廉价的，因为他们不会传递底层数组的拷贝
+
+____
+
+Go的`container`包自带了三种数据结构：`双向链表`、`堆`、`双向循环链表`  
+
+具体使用可以参看这里
+
+* [xxggy](https://my.oschina.net/xinxingegeya/blog/852207)
