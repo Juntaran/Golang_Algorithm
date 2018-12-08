@@ -13,7 +13,7 @@ import (
 
 func main() {
 	testArray := []int{4, 2, 6, 7, 9, 5, 1, 3}
-	//Quick_Sort.Quick_Sort_Recurse(testArray)
-	Quick_Sort.Quick_Sort_Unrecurse(testArray)
+	Quick_Sort.Quick_Sort_Recurse(testArray)
+	//Quick_Sort.Quick_Sort_Unrecurse(testArray)
 	fmt.Println(testArray)
 }
